@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="content">
+
+    <div class="doc-navs">
+
+        <h1>Documents</h1>
+
+        <ul>
+            {% for folder, tag in flattened_folders %}
+            {% if tag == 'open' %}
+            <ul>
+                <li>
+                    
+                    <div {% if not selected_doc and forloop.counter == 1 %}class="bold-link"{% endif %}>{{ folder.name }}</div>
+                    
+                    <ol>
+                        {% for doc in folder.documents.all %}
+                        <li><a {% if selected_doc == doc.id %}class="bold-link"{% endif %} href="{% url 'list_docs' document_id=doc.id %}">{{doc.name}}</a></li>
+                        {% endfor %}
+                    </ol>
+                </li>
+                {% elif tag == 'close' %}
+                </li>
+            </ul>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="doc-show">
+
+        <h1>{{document.name}}</h1>
+        <div class="meta-info">
+            <div>Current version : {{document.version}}</div>
+            <div>Created by : {{document.created_by}}</div>
+        </div>
+        
+
+        {{document.content|safe}}
+    
+    </div>
+    
+</div>
+
+
+
+
+<style>
+    .content{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+    }
+    .doc-navs{
+        width: 20%;
+        padding: 0.6em;
+        background-color: rgb(242, 252, 252);
+    }
+    ul, ol {
+        margin: 0.6em 0;
+        padding-left: 0.8em;
+    }
+    .doc-navs li{
+        margin: 0.4em 0;
+    }
+    .doc-navs a {
+        text-decoration: none;
+        color: rgb(0, 73, 95);
+    }
+    .doc-navs a:visited{
+        color: rgb(0, 73, 95);
+    }
+    .bold-link{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    .doc-show{
+        width: 80%;
+        overflow-y: scroll;
+        padding: 0.6em;
+    }
+    .meta-info{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    .meta-info div{
+        margin: 0.2em;
+    }
+</style>
+
+{% endblock %}
