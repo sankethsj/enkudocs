@@ -1,4 +1,15 @@
-*{
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: local('OpenSans-Regular'),
+            url('../static/fonts/OpenSans-Regular.ttf') format("truetype");
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: local('OpenSans-Bold'),
+            url('../static/fonts/OpenSans-Bold.ttf') format("truetype");
+}
+
+* {
     margin: 0;
     padding: 0;
 }
@@ -7,4 +18,5 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    font-family: 'OpenSans-Regular';
 }

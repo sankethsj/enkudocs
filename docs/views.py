@@ -26,7 +26,7 @@ def list_docs(request, document_id=None):
     context = {
         "folders": root_folders,
         "document": document,
-        "selected_doc": int(document_id),
+        "selected_doc": document_id,
         "flattened_folders": flattened_folders,
     }
 
